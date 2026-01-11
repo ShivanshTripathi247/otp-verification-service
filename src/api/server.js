@@ -1,6 +1,6 @@
-/*
-This file will make our server available
-*/
+/**
+ * This file will instantiate our express app
+ */
 import { PORT } from "../utils/helper.js";
 import express from "express";
 import client from "../adapters/redisClient.js";

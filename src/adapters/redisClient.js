@@ -1,5 +1,7 @@
 /**
-This file manages the connection beteen
+ * This file connects us with Redis server
+ * Creates a new redis client as an object
+ * Exports the client object 
  */
 import Redis from "ioredis";
 import { REDIS_PORT, REDIS_HOSTNAME, REDIS_DB} from "../utils/helper.js";

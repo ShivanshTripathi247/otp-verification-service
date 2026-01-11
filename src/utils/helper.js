@@ -1,5 +1,9 @@
+/**
+ * This file loads the environment variables
+ * stores them in variable 
+ * and export them to that whole workspace
+ */
 import 'dotenv/config';
-
 
 const PORT = process.env.PORT;
 const REDIS_PORT = process.env.REDIS_PORT;

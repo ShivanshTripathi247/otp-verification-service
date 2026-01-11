@@ -1,4 +1,3 @@
-/*
-This file will have all the crypto related 
-functions
-*/
+/**
+ * This file will have all the crypto related functions
+ */
