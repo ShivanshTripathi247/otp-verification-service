@@ -27,7 +27,7 @@ class otpService {
             .exec();
         
             console.log("OTP generated: ", otpGenerated);
-            return true;            
+            return {success: true, message: "OTP Generated!"};            
         } catch (err) {
             throw new Error("Error generating OTP: ", err);
         }
@@ -42,28 +42,31 @@ class otpService {
             
             if(Object.keys(result).length === 0) {
                 console.log("OTP expired or already used");
-                return false;
+                return {success: false, message: "OTP expired or already used"};
             }
             const code = Number(result.code);
             const attempts = Number(result.attempts);
+            console.log("attempts===>", attempts);
+            
             if(attempts >= 2) {
                 console.log("No more Attempts left");
-                await this.client.del(key)
-                return false;
+                await this.client.del(redisKey)
+                return {success: false, message: "No more Attempts left"};
             }  
             if(code === inputOtp) {
                 console.log("OTP Verified!");
-                await this.client.del(key);
-                return true;            
+                await this.client.del(redisKey);
+                return {success: true, message: "OTP Verified!"};            
             }    
             else {
-                console.log(`Attempt failed ${inputOtp}, attempts remaining - ${2 - attempts}, try again`);
-                await this.client.hincrby(key, "attempts", 1);
-                const now = await this.client.hgetall(key);
-                console.log(now);
+                const left = 2 - attempts;
+                console.log(`Attempt failed ${inputOtp}, attempts remaining - ${left}, try again`);
+                await this.client.hincrby(redisKey, "attempts", 1);
+                const now = await this.client.hgetall(redisKey);
+                console.log("NOOW =>>",now);
                 
     
-                return false;
+                return {success: false, message: `Attempt failed ${inputOtp}, attempts remaining - ${(2 - attempts)}, try again`};
             }            
         }
         catch(err) {
@@ -72,9 +75,9 @@ class otpService {
     }
 }
 
-const otpService = new otpService(client, 300);
+const otpServiceObj = new otpService(client, 60);
 
-export default otpService;
+export default otpServiceObj;
 // tests: -
 
 // generateOtp(3424);
