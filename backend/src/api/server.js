@@ -23,7 +23,10 @@ app.use(cors({
 const httpServer = createServer(app);
 export const io = new Server(httpServer, {
     // options
-    cors: { origin: "*" }
+    cors: { 
+        origin: FRONTEND_URL,
+        methods: [ 'POST' ]
+     }
 })
 
 io.on('connection', (socket) => {
@@ -57,7 +60,10 @@ subscriberClient.on('message', (channel, message) => {
 })
 
 
-httpServer.listen(SOCKET_PORT);
+httpServer.listen(SOCKET_PORT, ()=>{
+    console.log("Listening on port: ", SOCKET_PORT);
+    
+});
 
 app.use("/api/v1", generateOtp);
 app.use("/api/v1", verifyOtp);
@@ -80,6 +86,3 @@ app.get('/health', (req, res) => {
     })
 })
 
-app.listen(PORT, () => {
-    console.log(`Listening to port: ${PORT}`);
-})

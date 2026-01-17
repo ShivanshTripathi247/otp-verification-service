@@ -4,8 +4,8 @@ import axios from 'axios';
 import './App.css';
 
 // CHANGE THESE TO MATCH YOUR BACKEND PORTS
-const API_URL = "http://localhost:5000/api/v1"; 
-const SOCKET_URL = "http://localhost:8000"; 
+const API_URL = process.env.API_URL; 
+const SOCKET_URL = process.env.SOCKET_URL; 
 
 function App() {
   const [email, setEmail] = useState("");
