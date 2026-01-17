@@ -60,8 +60,8 @@ subscriberClient.on('message', (channel, message) => {
 })
 
 
-httpServer.listen(SOCKET_PORT, ()=>{
-    console.log("Listening on port: ", SOCKET_PORT);
+httpServer.listen(PORT, ()=>{
+    console.log("Listening on port: ", PORT);
     
 });
 
