@@ -1,0 +1,142 @@
+body {
+  background-color: #f0f2f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+h1 { color: #333; margin-bottom: 30px; }
+
+/* Stepper Styles */
+.stepper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* Connecting Line */
+.stepper::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #e0e0e0;
+  z-index: 0;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  background: #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.label { font-size: 12px; color: #999; }
+
+/* Active/Completed States */
+.step.completed .circle, .step.active .circle {
+  background: #4caf50;
+  color: white;
+}
+.step.active .circle {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+}
+.step.completed .label { color: #4caf50; }
+
+.status-bar {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+button {
+  padding: 12px 24px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+button:hover { background: #0056b3; }
+button:disabled { background: #ccc; cursor: not-allowed; }
+
+.verify-btn { background: #28a745; }
+.verify-btn:hover { background: #218838; }
+
+/* Console Logs */
+.console {
+  margin-top: 30px;
+  text-align: left;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.logs-window {
+  background: #1e1e1e;
+  color: #00ff00;
+  padding: 15px;
+  border-radius: 6px;
+  height: 150px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.log-line { margin-bottom: 5px; border-bottom: 1px solid #333; padding-bottom: 2px;}
