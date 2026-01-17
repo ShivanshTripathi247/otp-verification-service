@@ -45,7 +45,4 @@ async function otpGeneratingWorker() {
     }
 }
 
-const appy = express();
-
-
 otpGeneratingWorker();
