@@ -20,8 +20,7 @@ if (result.error) {
 // 3. Export the variables
 const PORT = process.env.PORT;
 const REDIS_PORT = process.env.REDIS_PORT;
-const REDIS_HOSTNAME = process.env.REDIS_HOSTNAME;
-const REDIS_DB = process.env.REDIS_DB;
+const REDIS_HOSTNAME = process.env.REDIS_HOSTNAME || '127.0.0.1';const REDIS_DB = process.env.REDIS_DB;
 const REDIS_URL = process.env.REDIS_URL
 const SMTP_HOST = process.env.SMTP_HOST;
 const SMTP_PORT = process.env.SMTP_PORT;
