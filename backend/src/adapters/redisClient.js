@@ -9,12 +9,12 @@ import { REDIS_PORT, REDIS_HOSTNAME, REDIS_DB, REDIS_URL} from "../utils/helper.
 // console.log(REDIS_PORT);
 
 export const client = new Redis(
-    REDIS_URL
-//     {
-//     port: REDIS_PORT,
-//     host: REDIS_HOSTNAME,
-//     db: REDIS_DB,
-// }
+    // REDIS_URL
+    {
+    port: REDIS_PORT,
+    host: REDIS_HOSTNAME,
+    db: REDIS_DB,
+}
 )
 
 client.on('error', (err) => {
@@ -28,12 +28,12 @@ client.on("ready", ()=>{
 
 
 export const subscriberClient = new Redis(
-    REDIS_URL
-//     {
-//     port: REDIS_PORT,
-//     host: REDIS_HOSTNAME,
-//     db: REDIS_DB,
-// }
+//     REDIS_URL
+    {
+    port: REDIS_PORT,
+    host: REDIS_HOSTNAME,
+    db: REDIS_DB,
+}
 )
 
 subscriberClient.on('error', (err) => {

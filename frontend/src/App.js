@@ -4,8 +4,10 @@ import axios from 'axios';
 import './App.css';
 
 // CHANGE THESE TO MATCH YOUR BACKEND PORTS
-const API_URL = process.env.API_URL; 
-const SOCKET_URL = process.env.SOCKET_URL; 
+const API_URL = process.env.REACT_APP_API_URL; 
+const SOCKET_URL = process.env.REACT_APP_SOCKET_URL; 
+
+      console.log(SOCKET_URL," ",API_URL);
 
 function App() {
   const [email, setEmail] = useState("");
@@ -25,13 +27,13 @@ function App() {
 
     // Listen for updates from the "Bridge"
     socketRef.current.on("progress_update", (data) => {
-      addLog(`📡 Update: ${data.status} (Stage ${data.stage})`);
+      addLog(`[UPDATE] Update: ${data.status} (Stage ${data.stage})`);
       setCurrentStage(data.stage);
       setStatusMessage(data.status);
     });
 
     socketRef.current.on("room_joined", (data) => {
-      addLog(`✅ Connected to Job Room: ${data.jobId}`);
+      addLog(`[CONNECTED] Connected to Job Room: ${data.jobId}`);
     });
 
     return () => socketRef.current.disconnect();
@@ -46,14 +48,15 @@ function App() {
     if (!email) return alert("Please enter an email");
     
     try {
-      addLog(`📤 Sending request for ${email}...`);
+      addLog(`[SEND] Sending request for ${email}...`);
+      console.log(SOCKET_URL," ",API_URL);
       
       // Call the API
       const res = await axios.post(`${API_URL}/generate`, { email });
       
       const newJobId = res.data.jobId;
       setJobId(newJobId);
-      addLog(`🆔 Job ID received: ${newJobId}`);
+      addLog(`[ID] Job ID received: ${newJobId}`);
       setCurrentStage(1); // Manually set stage 1 (Queued)
       setStatusMessage("Request Queued");
 
@@ -71,7 +74,7 @@ function App() {
     if (!otp) return alert("Please enter OTP");
     
     try {
-      addLog(`🔍 Verifying OTP: ${otp}...`);
+      addLog(`[VERIFICATION] Verifying OTP: ${otp}...`);
       
       // We must send jobId so backend knows which Room to notify!
       const res = await axios.post(`${API_URL}/verify`, { 
@@ -83,14 +86,14 @@ function App() {
       addLog(`Result: ${res.data.message}`);
     } catch (err) {
       console.error(err);
-      addLog(`Verification Failed: ${err.response?.data?.message}`);
+      addLog(`[VERIFICATION] Verification Failed: ${err.response?.data?.message}`);
     }
   };
 
   return (
     <div className="container">
       <div className="card">
-        <h1>🔐 Real-Time OTP System</h1>
+        <h1>Distributed OTP Verification Service</h1>
 
         {/* --- STAGE VISUALIZER --- */}
         <div className="stepper">

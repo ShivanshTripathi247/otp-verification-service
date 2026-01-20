@@ -7,15 +7,15 @@ import { client, subscriberClient } from "../src/adapters/redisClient.js";
 import otpServiceObj from "../src/services/otpService.js";
 import http from 'http';
 
-const healthServer = http.createServer((req, res) => {
-    res.writeHead(200);
-    res.end('Worker is running');
-});
+// const healthServer = http.createServer((req, res) => {
+//     res.writeHead(200);
+//     res.end('Worker is running');
+// });
 
-const PORT = process.env.PORT || 10000;
-healthServer.listen(PORT, () => {
-    console.log(`Worker health check listening on port ${PORT}`);
-});
+// const PORT = process.env.PORT || 10000;
+// healthServer.listen(PORT, () => {
+//     console.log(`Worker health check listening on port ${PORT}`);
+// });
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

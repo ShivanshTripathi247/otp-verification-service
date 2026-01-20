@@ -29,7 +29,7 @@ export async function emailValidator(req, res, next) {
     } catch (err) {
         console.log("Error Invalid Email!", err);
         res.status(400).send({success: false, message: "Invalid Email Address!"})
-        throw new Error(err);
+        // throw new Error(err);
     }
 
 }

@@ -23,6 +23,9 @@ export async function generateOtpController(req, res) {
         console.log("Error queueing OTP: ", err);
         throw new Error("Error while queueing OTP request: ", err);
     }
+
+    // WITHOUT QUEUEING
+
     // try {
     //     const response = await otpServiceObj.generateOtp(key);
         
@@ -48,11 +51,12 @@ export async function validateOtpController(req, res) {
             console.log("OTP Rejected", response);
             res.status(400).send(response);
         }
-
-        console.log("OTP Verified", response);
-        res.status(200).send(response);
+        else {
+            res.status(200).send(response);
+            console.log("OTP Verified", response);
+        }
     } catch (err) {
         console.log("Error verifying OTP: ", err);
-        throw new Error("Error verifying OTP: ", err);           
+        // throw new Error("Error verifying OTP: ", err);           
     }
 }
